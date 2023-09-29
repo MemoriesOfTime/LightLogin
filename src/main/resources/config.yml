@@ -1,0 +1,23 @@
+#passwordRandomKey: ""  #此项将在插件加载后自动生成
+passwordStrengthRequirements:
+  minLength: 6
+  maxLength: 16
+  needNumber: true
+  needLowercaseLetters: false
+  needUppercaseLetters: false
+  needSpecialCharacters: false
+xboxSkipLogin: true
+keepLoginTime: 300
+maxLoginErrorCount: 5
+loginLockTime: 300
+enableBindEmail: false
+enableBindPhone: false
+
+dataProvider: "Yaml"
+
+MySQL:
+  host: "127.0.0.1"
+  port: 3306
+  user: "root"
+  password: "root"
+  database: "LightLogin"

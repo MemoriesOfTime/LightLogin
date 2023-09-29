@@ -1,0 +1,32 @@
+header: |-
+  LightLogin 插件配置文件
+
+passwordRandomKey: |-
+  密码加密随机密钥 非必要请勿修改！
+  警告！修改将破坏现存所有密码！
+
+passwordStrengthRequirements: "密码强度要求"
+passwordStrengthRequirements.minLength: "密码最小长度"
+passwordStrengthRequirements.maxLength: "密码最大长度"
+passwordStrengthRequirements.needNumber: "密码是否需要包含数字"
+passwordStrengthRequirements.needLowercaseLetters: "密码是否需要包含小写字母"
+passwordStrengthRequirements.needUppercaseLetters: "密码是否需要包含大写字母"
+passwordStrengthRequirements.needSpecialCharacters: "密码是否需要包含特殊字符"
+
+xboxSkipLogin: "玩家登录Xbox时跳过密码验证"
+maxLoginErrorCount: "最多登录(密码)错误次数"
+loginLockTime: "错误次数过多时登录锁定时间(秒)"
+keepLoginTime: "保持登录有效时间 同ip进入不需要再次登录 单位秒"
+
+enableBindEmail: "是否启用绑定邮箱功能(需要安装MailAPI前置插件)"
+enableBindPhone: "是否启用绑定手机功能(需要安装SmsApi前置插件)"
+
+dataProvider: |-
+  数据存储方式
+  Yaml  : 使用Yaml格式保存到插件数据文件夹
+  MySQL : 使用MySQL配置连接数据库，保存到数据库
+MySQL: "MySQL数据库配置"
+
+footer: |-
+  你已到达文件的底部啦！
+  后面的区域，以后再来探索吧！
