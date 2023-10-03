@@ -5,6 +5,7 @@ import cn.lanink.lightlogin.data.provider.Provider;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 
+import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 
@@ -26,6 +27,10 @@ public class PlayerDataManager {
                 TASK_QUEUE.poll().run();
             }
         }, 1, true);
+    }
+
+    public static void setUUID(String playerName, UUID uuid) {
+        TASK_QUEUE.add(() -> provider.setUUID(playerName, uuid));
     }
 
     public static PlayerData getPlayerData(Player player) {

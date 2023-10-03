@@ -48,6 +48,9 @@ public class PlayerData {
         }
 
         this.setClientIdentification(Utils.getClientIdentification(player));
+
+        PlayerDataManager.setUUID(player.getName(), player.getUniqueId());
+
         player.setImmobile(false);
 
         this.loginErrorCount = 0;

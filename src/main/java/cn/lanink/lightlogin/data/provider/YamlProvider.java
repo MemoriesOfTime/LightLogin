@@ -103,6 +103,7 @@ public class YamlProvider implements Provider {
             }
         }
         this.uuidMappingConfig.set("mapping", map);
+        this.uuidMappingConfig.save();
     }
 
     @Override

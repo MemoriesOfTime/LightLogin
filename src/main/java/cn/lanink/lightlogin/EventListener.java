@@ -54,6 +54,7 @@ public class EventListener implements Listener {
         if (repeatPlayer != null) {
             PlayerData data = PlayerDataManager.getPlayerData(repeatPlayer);
             if (data.isLogin() || Utils.getClientIdentification(repeatPlayer).equals(data.getClientIdentification())) {
+                event.setCancelled(true);
                 player.kick("§c您已在其他客户端登录！", false);
             } else {
                 repeatPlayer.kick("§c您已在其他客户端登录！", false);
@@ -72,6 +73,7 @@ public class EventListener implements Listener {
                 && playerData.getLastLoginQuitTime() + this.lightLogin.getPluginConfig().getKeepLoginTime() * 1000L > System.currentTimeMillis()) {
             playerData.setLoginComplete(player);
             player.sendTitle(LightLogin.PLUGIN_NAME, "§a自动登录成功！");
+            this.checkPlayerBind(playerData, player);
             return;
         }
         if (!playerData.isRegistered()) {
@@ -80,8 +82,22 @@ public class EventListener implements Listener {
                 && Utils.getClientIdentification(player).equals(playerData.getClientIdentification())) {
             playerData.setLoginComplete(player);
             player.sendTitle(LightLogin.PLUGIN_NAME, "§a通过Xbox自动登录成功！");
+            this.checkPlayerBind(playerData, player);
         } else {
             FormHelper.sendLoginForm(player);
+        }
+    }
+
+    private void checkPlayerBind(PlayerData data, Player player) {
+        PluginConfig pluginConfig = this.lightLogin.getPluginConfig();
+        if (pluginConfig.isEnableBindEmail() || pluginConfig.isEnableBindPhone()) {
+            if (!data.isBindEmail() && !data.isBindPhone()) {
+                this.lightLogin.getServer().getScheduler().scheduleDelayedTask(this.lightLogin, () -> {
+                    if (player.isOnline()) {
+                        player.sendMessage("[" + LightLogin.PLUGIN_NAME + "] §e您还未绑定邮箱或手机！建议您使用 /LightLogin 命令进行绑定！");
+                    }
+                }, 20, true); //稍微延迟下保证信息排在后面显示
+            }
         }
     }
 
