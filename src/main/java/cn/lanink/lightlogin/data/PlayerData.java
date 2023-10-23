@@ -13,21 +13,21 @@ public class PlayerData {
 
     private String name;
 
-    private String password;
-    private String email;
-    private String phone;
+    private String password = "";
+    private String email = "";
+    private String phone = "";
 
-    private String clientIdentification;
+    private String clientIdentification = "";
     @Deprecated
-    private String lastLoginIp;
-    private long lastLoginQuitTime; //时间戳
-    private long loginLockTime; //时间戳
-    private long lastSendEmailCodeTime; //时间戳
-    private long lastSendSmsCodeTime; //时间戳
+    private String lastLoginIp = "";
+    private long lastLoginQuitTime = -1; //时间戳
+    private long loginLockTime = -1; //时间戳
+    private long lastSendEmailCodeTime = -1; //时间戳
+    private long lastSendSmsCodeTime = -1; //时间戳
 
     private boolean isLogin = false;
     private boolean isXboxLogin = false;
-    public int loginErrorCount;
+    public int loginErrorCount = 0;
 
     public PlayerData(String name) {
         this.name = name;
