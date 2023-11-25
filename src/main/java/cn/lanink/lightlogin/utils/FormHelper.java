@@ -252,6 +252,7 @@ public class FormHelper {
             PlayerData playerData = PlayerDataManager.getPlayerData(player);
             playerData.setLastSendEmailCodeTime(System.currentTimeMillis());
             player.sendTitle(LightLogin.PLUGIN_NAME, "验证码已发送，请稍等片刻！");
+            player.sendMessage("验证码已发送，请注意查收！Tips：可使用/LLBind 命令完成绑定！");
             MailAPI.getInstance().sendMail(
                     verificationData.getAccountNumber(),
                     "LightLogin 账号绑定验证码",
@@ -358,6 +359,7 @@ public class FormHelper {
             PlayerData playerData = PlayerDataManager.getPlayerData(player);
             playerData.setLastSendSmsCodeTime(System.currentTimeMillis());
             player.sendTitle(LightLogin.PLUGIN_NAME, "验证码已发送，请稍等片刻！");
+            player.sendMessage("验证码已发送，请注意查收！Tips：可使用/LLBind 命令完成绑定！");
             SmsApi.getInstance().sendSms(verificationData.getAccountNumber(), verificationData.getCode(), (callBack) -> {
                 if (callBack.isSuccess()) {
                     sendBindPhoneVerifyForm(player, playerData, verificationData);
@@ -377,7 +379,7 @@ public class FormHelper {
      * @param playerData 玩家数据
      * @param verificationData 验证数据
      */
-    private static void sendBindPhoneVerifyForm(Player player, PlayerData playerData, PlayerVerificationData verificationData) {
+    public static void sendBindPhoneVerifyForm(Player player, PlayerData playerData, PlayerVerificationData verificationData) {
         if (!LightLogin.getInstance().getPluginConfig().isEnableBindPhone()) {
             return;
         }

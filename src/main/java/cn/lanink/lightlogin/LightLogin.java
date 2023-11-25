@@ -1,5 +1,6 @@
 package cn.lanink.lightlogin;
 
+import cn.lanink.lightlogin.command.LightLoginBindCommand;
 import cn.lanink.lightlogin.command.LightLoginCommand;
 import cn.lanink.lightlogin.data.PlayerDataManager;
 import cn.lanink.lightlogin.data.provider.MysqlProvider;
@@ -81,6 +82,7 @@ public class LightLogin extends PluginBase {
         PlayerDataManager.init(this);
 
         this.getServer().getCommandMap().register("LightLogin", new LightLoginCommand("LightLogin"));
+        this.getServer().getCommandMap().register("LightLoginBind", new LightLoginBindCommand("LLBind"));
 
         this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
 
