@@ -18,6 +18,8 @@ public class PluginConfig {
     private final LightLogin lightLogin;
     private final Config config;
 
+    private boolean debug;
+
     private String passwordRandomKey;
 
     private final PasswordStrengthRequirements passwordStrengthRequirements;
@@ -40,6 +42,11 @@ public class PluginConfig {
         this.lightLogin = lightLogin;
         lightLogin.saveDefaultConfig();
         this.config = lightLogin.getConfig();
+
+        this.debug = config.getBoolean("debug", false);
+        if (this.debug) {
+            lightLogin.getLogger().warning("您已开启调试模式！");
+        }
 
         this.passwordRandomKey = config.getString("passwordRandomKey");
         if (this.passwordRandomKey.isBlank()) {

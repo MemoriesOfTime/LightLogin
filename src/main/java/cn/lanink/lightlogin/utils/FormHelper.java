@@ -253,11 +253,17 @@ public class FormHelper {
             playerData.setLastSendEmailCodeTime(System.currentTimeMillis());
             player.sendTitle(LightLogin.PLUGIN_NAME, "验证码已发送，请稍等片刻！");
             player.sendMessage("验证码已发送，请注意查收！Tips：可使用/LLBind 命令完成绑定！");
+            if (LightLogin.getInstance().getPluginConfig().isDebug()) {
+                LightLogin.getInstance().getLogger().info("[debug] 发送验证码：" + verificationData.getCode() + " 目标邮箱：" + verificationData.getAccountNumber());
+            }
             MailAPI.getInstance().sendMail(
                     verificationData.getAccountNumber(),
                     "LightLogin 账号绑定验证码",
                     "您的验证码为： " + verificationData.getCode() + " \n请在三分钟内输入验证码完成绑定！",
                     (callBack) -> {
+                        if (LightLogin.getInstance().getPluginConfig().isDebug()) {
+                            LightLogin.getInstance().getLogger().info("[debug] 验证码发送结果：" + callBack.getMessage());
+                        }
                         if (callBack.isSuccess()) {
                             sendBindEmailVerifyForm(player, playerData, verificationData);
                         } else {
@@ -271,7 +277,7 @@ public class FormHelper {
     }
 
     public static void sendBindEmailVerifyForm(@NotNull Player player, @NotNull PlayerData playerData, @NotNull PlayerVerificationData verificationData) {
-        if (!LightLogin.getInstance().getPluginConfig().isEnableBindPhone()) {
+        if (!LightLogin.getInstance().getPluginConfig().isEnableBindEmail()) {
             return;
         }
         AdvancedFormWindowCustom verifyCustom = new AdvancedFormWindowCustom(LightLogin.PLUGIN_NAME);
