@@ -9,11 +9,13 @@ import cn.lanink.lightlogin.utils.AES;
 import cn.lanink.lightlogin.utils.PlayerVerificationData;
 import cn.lanink.lightlogin.utils.Utils;
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.plugin.PluginBase;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.smallaswater.easysql.exceptions.MySqlLoginException;
 import lombok.Getter;
+import updata.AutoData;
 
 import java.util.concurrent.TimeUnit;
 
@@ -60,6 +62,16 @@ public class LightLogin extends PluginBase {
 
     @Override
     public void onEnable() {
+        try {
+            if (Server.getInstance().getPluginManager().getPlugin("AutoUpData") != null) {
+                if (AutoData.defaultUpDataByMaven(this, this.getFile(), "cn.lanink", "LightLogin", null)) {
+                    return;
+                }
+            }
+        } catch (Throwable e) {
+            this.getLogger().warning("插件自动更新失败！请检查AutoUpData前置插件！");
+        }
+
         this.saveResource("介绍.txt", true);
 
         this.pluginConfig = new PluginConfig(this);
