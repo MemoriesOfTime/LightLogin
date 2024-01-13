@@ -7,4 +7,5 @@ author: "LT_Name"
 load: POSTWORLD
 softdepend:
   - "MemoriesOfTime-GameCore"
+  - "EasyMySQL"
   - "AutoUpData"

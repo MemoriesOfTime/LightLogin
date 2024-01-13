@@ -13,7 +13,6 @@ import cn.nukkit.Server;
 import cn.nukkit.plugin.PluginBase;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.smallaswater.easysql.exceptions.MySqlLoginException;
 import lombok.Getter;
 import updata.AutoData;
 
@@ -81,7 +80,7 @@ public class LightLogin extends PluginBase {
             try {
                 PlayerDataManager.setProvider(new MysqlProvider(this.pluginConfig.getMySqlConfig()));
                 this.getLogger().info("数据存储方式：MySQL");
-            } catch (MySqlLoginException e) {
+            } catch (Throwable e) {
                 this.getLogger().error("§c数据库连接失败！请检查配置文件！");
                 this.getPluginLoader().disablePlugin(this);
                 return;
