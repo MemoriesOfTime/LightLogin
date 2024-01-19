@@ -30,6 +30,18 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
+    public void onPlayerKick(PlayerKickEvent event) {
+        if (event.getReasonEnum() == PlayerKickEvent.Reason.FLYING_DISABLED) {
+            Player player = event.getPlayer();
+            PlayerData playerData = PlayerDataManager.getPlayerData(player);
+            if (!playerData.isLogin() || System.currentTimeMillis() - playerData.getLoginCompleteTime() < 3000) {
+                player.resetInAirTicks();
+                event.setCancelled();
+            }
+        }
+    }
+
+    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         player.setImmobile(true);

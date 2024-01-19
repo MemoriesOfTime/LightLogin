@@ -29,6 +29,8 @@ public class PlayerData {
     private boolean isXboxLogin = false;
     public int loginErrorCount = 0;
 
+    private long loginCompleteTime = -1; //时间戳
+
     public PlayerData(String name) {
         this.name = name;
     }
@@ -54,6 +56,8 @@ public class PlayerData {
         player.setImmobile(false);
 
         this.loginErrorCount = 0;
+
+        this.loginCompleteTime = System.currentTimeMillis();
 
         this.save();
     }
